@@ -40,7 +40,7 @@ function SearchForm() {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-5 px-4 py-5">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 px-4 py-5">
       <header className="flex items-center gap-2">
         <Link href="/" aria-label="戻る" className="flex h-11 w-11 items-center justify-center">
           <Icon name="chevron-left" className="h-6 w-6" />
@@ -54,7 +54,7 @@ function SearchForm() {
           <select
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-            className="min-h-11 rounded-[var(--radius-card)] border border-line bg-surface px-3 text-base"
+            className="min-h-11 panel px-3 text-base"
           >
             <option value="">指定しない</option>
             {GENRES.map((g) => (
@@ -70,7 +70,7 @@ function SearchForm() {
           <select
             value={area}
             onChange={(e) => setArea(e.target.value)}
-            className="min-h-11 rounded-[var(--radius-card)] border border-line bg-surface px-3 text-base"
+            className="min-h-11 panel px-3 text-base"
           >
             <option value="">指定しない</option>
             {STAY_AREAS.map((a) => (
@@ -81,13 +81,9 @@ function SearchForm() {
           </select>
         </label>
 
-        <p className="text-sm text-ink-sub">
-          サイズは、ホームの「小型・中型・大型」で切り替えられます。
-        </p>
-
         <button
           type="submit"
-          className="min-h-12 rounded-[var(--radius-card)] bg-brand px-4 text-base font-bold text-white"
+          className="btn btn-primary w-full"
         >
           この条件で探す
         </button>

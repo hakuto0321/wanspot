@@ -62,7 +62,7 @@ export default function DogSizeForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={30}
-          className="min-h-11 rounded-[var(--radius-card)] border border-line bg-surface px-3 text-base"
+          className="min-h-11 panel px-3 text-base"
         />
       </label>
 
@@ -72,17 +72,13 @@ export default function DogSizeForm({
           value={breed}
           onChange={(e) => setBreed(e.target.value)}
           maxLength={30}
-          className="min-h-11 rounded-[var(--radius-card)] border border-line bg-surface px-3 text-base"
+          className="min-h-11 panel px-3 text-base"
         />
       </label>
 
-      <p className="text-sm text-ink-sub">
-        登録は不要です。入力内容はこの端末にだけ保存されます。
-      </p>
-
       <button
         type="submit"
-        className="min-h-12 rounded-[var(--radius-card)] bg-brand px-4 text-base font-bold text-white"
+        className="btn btn-primary w-full"
       >
         {submitLabel}
       </button>

@@ -1,4 +1,4 @@
-import type { Spot } from "./domain";
+import type { Spot, SpotReport } from "./domain";
 
 // Supabase 未接続のときに使うサンプルデータ。
 // 名称・座標・条件はすべて架空の開発用データで、実在の店舗・施設の情報ではない。
@@ -16,6 +16,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: "（サンプル）駐車場 約10台",
+    nearestStation: "（サンプル）渋谷駅から徒歩5分",
+    photos: [],
+    reportCount: 12,
+    lastReportedOn: "2026-11-02",
     status: "user_verified",
     lastVerifiedAt: "2026-10-12T00:00:00Z",
     policy: {
@@ -42,6 +46,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: null,
+    nearestStation: "（サンプル）川越駅からバスで10分",
+    photos: [],
+    reportCount: 0,
+    lastReportedOn: null,
     status: "unverified",
     lastVerifiedAt: null,
     policy: {
@@ -68,6 +76,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: null,
+    nearestStation: "（サンプル）船橋駅から徒歩8分",
+    photos: [],
+    reportCount: 0,
+    lastReportedOn: null,
     status: "unverified",
     lastVerifiedAt: null,
     policy: {
@@ -94,6 +106,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: "（サンプル）大型駐車場あり",
+    nearestStation: "（サンプル）前橋駅からバスで15分",
+    photos: [],
+    reportCount: 0,
+    lastReportedOn: null,
     status: "needs_recheck",
     lastVerifiedAt: "2025-09-01T00:00:00Z",
     policy: {
@@ -120,6 +136,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: null,
+    nearestStation: "（サンプル）箱根湯本駅から徒歩10分",
+    photos: [],
+    reportCount: 0,
+    lastReportedOn: null,
     status: "unverified",
     lastVerifiedAt: null,
     policy: {
@@ -146,6 +166,10 @@ export const SAMPLE_SPOTS: Spot[] = [
     googlePlaceId: null,
     officialUrl: null,
     parkingNote: null,
+    nearestStation: "（サンプル）三鷹駅から徒歩3分",
+    photos: [],
+    reportCount: 5,
+    lastReportedOn: "2026-10-20",
     status: "user_verified",
     lastVerifiedAt: "2026-11-02T00:00:00Z",
     policy: {
@@ -161,3 +185,33 @@ export const SAMPLE_SPOTS: Spot[] = [
     },
   },
 ];
+
+// サンプルのレビュー（架空・開発用）。実際の利用者の報告ではない。
+export const SAMPLE_REPORTS: Record<string, SpotReport[]> = {
+  "sample-1": [
+    {
+      id: "sample-report-1",
+      result: "entered",
+      dogSize: "medium",
+      breed: null,
+      area: "terrace",
+      comment: "（サンプル）テラス席で、水を出してもらえました。",
+      photoUrl: null,
+      visitedOn: "2026-11-02",
+      helpfulCount: 3,
+    },
+  ],
+  "sample-6": [
+    {
+      id: "sample-report-2",
+      result: "refused",
+      dogSize: "medium",
+      breed: null,
+      area: "indoor",
+      comment: "（サンプル）店内は不可と言われました。",
+      photoUrl: null,
+      visitedOn: "2026-10-20",
+      helpfulCount: 1,
+    },
+  ],
+};

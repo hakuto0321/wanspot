@@ -2,7 +2,7 @@
 
 /*
  * デザインルール（CLAUDE.md）のトークン。ダークモードは作らない（ナチュラル×シンプル）。
- * 色だけで意味を伝えない。OK/NG は必ず文字も出すこと。
+ * 色だけで意味を伝えない。OK/NG は必ず文字も出すこと。影・グラデーションは使わない。
  */
 @theme {
   --color-canvas: #f5f4ef; /* 背景 */
@@ -11,6 +11,7 @@
   --color-ink: #1e2a23; /* 文字 */
   --color-ink-sub: #5b6660; /* 補足文字 */
   --color-brand: #2e6a4c; /* メイン（森の緑） */
+  --color-brand-dark: #1f4d36;
   --color-ok-bg: #e3eee6;
   --color-ok-ink: #1f4d36;
   --color-ng-bg: #f6e4de;
@@ -19,7 +20,7 @@
 
   --font-sans: var(--font-zen-kaku), ui-sans-serif, system-ui, sans-serif;
 
-  --radius-card: 14px;
+  --radius-card: 12px;
 }
 
 html {
@@ -32,4 +33,101 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.7;
+  font-feature-settings: "palt";
+}
+
+/* 入力欄：ラベル・枠・高さを全画面で揃える */
+input:not([type="radio"]):not([type="checkbox"]),
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  padding: 8px 12px;
+  font-size: 16px;
+  color: var(--color-ink);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* 見出しと区切り（企業サイトらしい情報の並べ方） */
+.section-title {
+  border-bottom: 2px solid var(--color-brand);
+  padding-bottom: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.panel {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--color-ink-sub);
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid var(--color-brand);
+  transition: background-color 120ms ease;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-brand);
+}
+.btn-secondary:hover {
+  background: var(--color-ok-bg);
+}
+
+/* 表（条件の一覧など） */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.data-table th,
+.data-table td {
+  border-top: 1px solid var(--color-line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.data-table th {
+  width: 7.5em;
+  color: var(--color-ink-sub);
+  font-weight: 500;
+  white-space: nowrap;
 }

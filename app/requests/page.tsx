@@ -30,11 +30,8 @@ export default function RequestsPage() {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-5 px-4 py-5">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 px-4 py-5">
       <h1 className="text-2xl font-bold text-brand">追加リクエスト</h1>
-      <p className="text-base text-ink-sub">
-        載っていないスポットを教えてください。公式情報を確認してから追加します。
-      </p>
 
       {!ready ? (
         <p className="text-ink-sub">読み込み中…</p>
@@ -43,15 +40,14 @@ export default function RequestsPage() {
           サーバーに接続されていないため、送信できません。
         </p>
       ) : !user ? (
-        <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
-          <p>リクエストの送信にはログインが必要です。</p>
-          <Link href="/login?next=/requests" className="mt-3 inline-block font-bold text-brand underline">
-            ログインする
+        <div className="panel p-4">
+          <Link href="/login?next=/requests" className="btn btn-primary w-full">
+            ログインして送る
           </Link>
         </div>
       ) : done ? (
-        <p role="status" className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
-          受け付けました。追加まで時間がかかることがあります。
+        <p role="status" className="panel p-4">
+          送信しました
         </p>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -62,7 +58,7 @@ export default function RequestsPage() {
               maxLength={100}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="min-h-11 rounded-[var(--radius-card)] border border-line bg-surface px-3 text-base"
+              className="min-h-11 panel px-3 text-base"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -72,14 +68,14 @@ export default function RequestsPage() {
               rows={3}
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-base"
+              className="panel px-3 py-2 text-base"
             />
           </label>
           {error ? <p role="alert" className="text-sm text-ng-ink">{error}</p> : null}
           <button
             type="submit"
             disabled={sending}
-            className="min-h-12 rounded-[var(--radius-card)] bg-brand px-4 text-base font-bold text-white disabled:opacity-60"
+            className="btn btn-primary w-full disabled:opacity-60"
           >
             {sending ? "送信中…" : "リクエストを送る"}
           </button>

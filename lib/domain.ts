@@ -130,11 +130,40 @@ export type Spot = {
   googlePlaceId: string | null;
   officialUrl: string | null;
   parkingNote: string | null;
+  /** 最寄り駅とアクセスの一文（例：「渋谷駅 徒歩5分」）。公式情報か利用者の報告だけを根拠にする */
+  nearestStation: string | null;
+  /** 承認済みの写真。出典とライセンスを必ず持つ */
+  photos: SpotPhoto[];
+  /** 承認済みの利用者報告の件数（報告者は出さない） */
+  reportCount: number;
+  /** 最後に報告された日（承認済みのうち最新の訪問日） */
+  lastReportedOn: string | null;
   status: VerifyStatus;
   lastVerifiedAt: string | null;
   policy: Policy | null;
   /** 検索時に計算される。保存しない */
   distanceM?: number;
+};
+
+export type SpotPhoto = {
+  url: string;
+  source: "owned" | "user_report" | "commons" | "licensed";
+  creditAuthor: string | null;
+  license: string;
+  sourceUrl: string | null;
+};
+
+/** 承認済みの報告（レビュー）。報告者の情報は含めない */
+export type SpotReport = {
+  id: string;
+  result: ReportResult;
+  dogSize: DogSize | null;
+  breed: string | null;
+  area: StayArea | null;
+  comment: string | null;
+  photoUrl: string | null;
+  visitedOn: string;
+  helpfulCount: number;
 };
 
 export function allowFor(policy: Policy | null, size: DogSize): AllowState {

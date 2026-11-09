@@ -26,14 +26,11 @@ function Done() {
   }, [detail, router]);
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center gap-4 px-4 py-16 text-center">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center gap-4 px-4 py-16 text-center">
       <span className="flex h-16 w-16 items-center justify-center rounded-full bg-ok-bg text-ok-ink">
         <Icon name="check" className="h-8 w-8" />
       </span>
       <h1 className="text-2xl font-bold">報告を送りました</h1>
-      <p className="text-base text-ink-sub">
-        ありがとうございます。内容を確認してから、スポットの確認状況に反映されます。
-      </p>
       <Link href={detail} className="mt-4 flex min-h-12 items-center rounded-[var(--radius-card)] bg-brand px-6 font-bold text-white">
         スポットの詳細に戻る
       </Link>

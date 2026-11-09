@@ -40,7 +40,7 @@ export default function MyPage() {
   }, [sessionReady, user]);
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 py-5">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-5">
       <h1 className="text-2xl font-bold text-brand">マイページ</h1>
 
       {/* うちの子 */}
@@ -61,7 +61,13 @@ export default function MyPage() {
         {!profileReady ? (
           <p className="text-ink-sub">読み込み中…</p>
         ) : !profile ? (
-          <p className="text-ink-sub">まだ登録されていません。</p>
+          <div className="flex flex-col gap-3">
+            <DogSizeForm
+              initial={null}
+              submitLabel="登録する"
+              onSubmit={(p) => save(p)}
+            />
+          </div>
         ) : editing ? (
           <DogSizeForm
             initial={profile}
@@ -72,7 +78,7 @@ export default function MyPage() {
             }}
           />
         ) : (
-          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
+          <div className="panel p-4">
             <p className="text-base font-bold">{profile.name || "（名前なし）"}</p>
             <p className="text-base">
               {SIZE_LABEL[profile.size]}
@@ -85,7 +91,7 @@ export default function MyPage() {
       {/* お気に入り */}
       <section aria-labelledby="fav-heading" className="flex flex-col gap-2">
         <h2 id="fav-heading" className="text-lg font-bold">お気に入り</h2>
-        <Link href="/favorites" className="rounded-[var(--radius-card)] border border-line bg-surface p-4 text-base">
+        <Link href="/favorites" className="panel p-4 text-base">
           {favorites.length}件のスポット
         </Link>
       </section>
@@ -96,10 +102,9 @@ export default function MyPage() {
         {!sessionReady ? (
           <p className="text-ink-sub">読み込み中…</p>
         ) : !user ? (
-          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
-            <p>ログインすると、送った報告の履歴を確認できます。</p>
-            <Link href="/login?next=/mypage" className="mt-3 inline-block font-bold text-brand underline">
-              ログインする
+          <div className="panel p-4">
+            <Link href="/login?next=/mypage" className="btn btn-primary w-full">
+              ログイン
             </Link>
           </div>
         ) : (
@@ -128,11 +133,11 @@ export default function MyPage() {
                   <li key={r.id}>
                     <Link
                       href={`/spots/${r.spotId}`}
-                      className="block rounded-[var(--radius-card)] border border-line bg-surface p-4"
+                      className="block panel p-4"
                     >
                       <span className="block font-bold">{r.spotName}</span>
                       <span className="block text-sm">
-                        {RESULT_LABEL[r.result]}・{SIZE_LABEL[r.dogSize]}・{formatDate(r.visitedOn)}
+                        {RESULT_LABEL[r.result]}{r.dogSize ? `・${SIZE_LABEL[r.dogSize]}` : ""}・{formatDate(r.visitedOn)}
                       </span>
                       <span className="block text-sm text-ink-sub">
                         反映状況：{MODERATION_LABEL[r.moderation]}
