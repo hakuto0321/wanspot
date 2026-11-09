@@ -27,7 +27,7 @@ function Done() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center gap-4 px-4 py-16 text-center">
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-ok-bg text-ok-ink">
+      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-surface text-ink">
         <Icon name="check" className="h-8 w-8" />
       </span>
       <h1 className="text-2xl font-bold">報告を送りました</h1>

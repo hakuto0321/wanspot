@@ -6,11 +6,9 @@ import { Suspense, useState } from "react";
 import Icon from "@/components/Icon";
 import {
   AREA_LABEL,
-  GENRE_LABEL,
-  GENRES,
   STAY_AREAS,
-  type Genre,
   type StayArea,
+  GENRE_GROUPS,
 } from "@/lib/domain";
 
 export default function SearchPage() {
@@ -33,7 +31,7 @@ function SearchForm() {
     const next = new URLSearchParams();
     const size = params.get("size");
     if (size) next.set("size", size);
-    if (genre && (GENRES as readonly string[]).includes(genre)) next.set("genre", genre as Genre);
+    if (genre && GENRE_GROUPS.some((g) => g.key === genre)) next.set("genre", genre);
     if (area && (STAY_AREAS as readonly string[]).includes(area)) next.set("area", area as StayArea);
     const qs = next.toString();
     router.push(qs ? `/?${qs}` : "/");
@@ -57,9 +55,9 @@ function SearchForm() {
             className="min-h-11 panel px-3 text-base"
           >
             <option value="">指定しない</option>
-            {GENRES.map((g) => (
-              <option key={g} value={g}>
-                {GENRE_LABEL[g]}
+            {GENRE_GROUPS.map((g) => (
+              <option key={g.key} value={g.key}>
+                {g.label}
               </option>
             ))}
           </select>

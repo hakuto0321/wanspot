@@ -218,7 +218,7 @@ function SpotDetailView() {
           href={`https://www.google.com/maps/search/?api=1&query=${current.lat},${current.lng}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-fit text-sm font-bold text-brand underline underline-offset-4"
+          className="w-fit text-sm font-bold text-ink underline underline-offset-4"
         >
           地図で場所を見る
         </a>
@@ -227,7 +227,7 @@ function SpotDetailView() {
           <span className="text-sm text-ink-sub">最終確認日：{formatDate(current.lastVerifiedAt)}</span>
         </div>
         {failed ? (
-          <p className="text-sm text-ng-ink">通信できないため、保存時点の情報を表示しています。</p>
+          <p className="text-sm text-ink">通信できないため、保存時点の情報を表示しています。</p>
         ) : null}
       </section>
 
@@ -243,36 +243,36 @@ function SpotDetailView() {
               ))}
             </div>
             <dl className="grid grid-cols-[7.5em_1fr] text-[15px]">
-              <dt className="border-t border-line py-2.5 text-ink-sub">過ごし方</dt>
-              <dd className="border-t border-line py-2.5">
+              <dt className="border-t border-line-soft py-2.5 text-ink-sub">過ごし方</dt>
+              <dd className="border-t border-line-soft py-2.5">
                 {policy.areas.length > 0
                   ? policy.areas.map((a) => AREA_LABEL[a]).join("・")
                   : "情報なし"}
               </dd>
-              <dt className="border-t border-line py-2.5 text-ink-sub">ルール</dt>
-              <dd className="border-t border-line py-2.5">
+              <dt className="border-t border-line-soft py-2.5 text-ink-sub">ルール</dt>
+              <dd className="border-t border-line-soft py-2.5">
                 {policy.rules.length > 0
                   ? policy.rules.map((r) => RULE_LABEL[r] ?? r).join("・")
                   : "情報なし"}
               </dd>
-              <dt className="border-t border-line py-2.5 text-ink-sub">設備</dt>
-              <dd className="border-t border-line py-2.5">
+              <dt className="border-t border-line-soft py-2.5 text-ink-sub">設備</dt>
+              <dd className="border-t border-line-soft py-2.5">
                 {policy.amenities.length > 0
                   ? policy.amenities.map((a) => AMENITY_LABEL[a] ?? a).join("・")
                   : "情報なし"}
               </dd>
-              <dt className="border-t border-line py-2.5 text-ink-sub">予約</dt>
-              <dd className="border-t border-line py-2.5">{RESERVATION_LABEL[policy.reservation]}</dd>
+              <dt className="border-t border-line-soft py-2.5 text-ink-sub">予約</dt>
+              <dd className="border-t border-line-soft py-2.5">{RESERVATION_LABEL[policy.reservation]}</dd>
               {policy.feeNote ? (
                 <>
-                  <dt className="border-t border-line py-2.5 text-ink-sub">料金</dt>
-                  <dd className="border-t border-line py-2.5">{policy.feeNote}</dd>
+                  <dt className="border-t border-line-soft py-2.5 text-ink-sub">料金</dt>
+                  <dd className="border-t border-line-soft py-2.5">{policy.feeNote}</dd>
                 </>
               ) : null}
               {current.parkingNote ? (
                 <>
-                  <dt className="border-t border-line py-2.5 text-ink-sub">駐車場</dt>
-                  <dd className="border-t border-line py-2.5">{current.parkingNote}</dd>
+                  <dt className="border-t border-line-soft py-2.5 text-ink-sub">駐車場</dt>
+                  <dd className="border-t border-line-soft py-2.5">{current.parkingNote}</dd>
                 </>
               ) : null}
             </dl>
@@ -305,14 +305,14 @@ function SpotDetailView() {
             {reviews.map((r) => {
               const helpful = helpfulIds.has(r.id);
               return (
-                <li key={r.id} className="flex flex-col gap-2 border-b border-line py-4 first:pt-2">
+                <li key={r.id} className="flex flex-col gap-2 border-b border-line-soft py-4 first:pt-2">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                     <span
                       className={`rounded px-2 py-0.5 font-bold ${
                         r.result === "entered"
-                          ? "bg-ok-bg text-ok-ink"
+                          ? "bg-surface text-ink"
                           : r.result === "refused"
-                            ? "bg-ng-bg text-ng-ink"
+                            ? "bg-surface text-ink"
                             : "border border-line text-ink-sub"
                       }`}
                     >
@@ -363,14 +363,14 @@ function SpotDetailView() {
         <ul className="flex flex-col gap-1 text-base">
           {current.officialUrl ? (
             <li>
-              <a href={current.officialUrl} target="_blank" rel="noopener noreferrer" className="text-brand underline">
+              <a href={current.officialUrl} target="_blank" rel="noopener noreferrer" className="text-ink underline">
                 公式サイト
               </a>
             </li>
           ) : null}
           {policy?.sourceUrl ? (
             <li>
-              <a href={policy.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-brand underline">
+              <a href={policy.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-ink underline">
                 同伴条件の根拠
               </a>
             </li>

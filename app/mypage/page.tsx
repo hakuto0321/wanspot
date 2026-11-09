@@ -41,7 +41,7 @@ export default function MyPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-5">
-      <h1 className="text-2xl font-bold text-brand">マイページ</h1>
+      <h1 className="text-2xl font-bold text-ink">マイページ</h1>
 
       {/* うちの子 */}
       <section aria-labelledby="dog-heading" className="flex flex-col gap-3">
@@ -51,7 +51,7 @@ export default function MyPage() {
             <button
               type="button"
               onClick={() => setEditing(true)}
-              className="flex min-h-11 items-center gap-1 px-2 text-base text-brand"
+              className="flex min-h-11 items-center gap-1 px-2 text-base text-ink"
             >
               <Icon name="pencil" className="h-5 w-5" />
               変更
@@ -122,7 +122,7 @@ export default function MyPage() {
                 ログアウト
               </button>
             </div>
-            {error ? <p role="alert" className="text-sm text-ng-ink">{error}</p> : null}
+            {error ? <p role="alert" className="text-sm text-ink">{error}</p> : null}
             {reports === null ? (
               <p className="text-ink-sub">読み込み中…</p>
             ) : reports.length === 0 ? (

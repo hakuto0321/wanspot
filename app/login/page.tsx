@@ -138,7 +138,7 @@ function Login() {
 
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-5 px-4 py-6">
-      <h1 className="text-2xl font-bold text-brand">{title}</h1>
+      <h1 className="text-2xl font-bold text-ink">{title}</h1>
 
       {mode === "signin" || mode === "signup" ? (
         <>
@@ -219,7 +219,7 @@ function Login() {
           </fieldset>
         ) : null}
 
-        {error ? <p role="alert" className="text-sm text-ng-ink">{error}</p> : null}
+        {error ? <p role="alert" className="text-sm text-ink">{error}</p> : null}
         {message ? <p role="status" className="panel p-4 text-sm">{message}</p> : null}
 
         <button type="submit" disabled={busy} className="btn btn-primary w-full disabled:opacity-60">

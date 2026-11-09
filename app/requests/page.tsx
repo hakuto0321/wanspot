@@ -31,12 +31,12 @@ export default function RequestsPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-5 px-4 py-5">
-      <h1 className="text-2xl font-bold text-brand">追加リクエスト</h1>
+      <h1 className="text-2xl font-bold text-ink">追加リクエスト</h1>
 
       {!ready ? (
         <p className="text-ink-sub">読み込み中…</p>
       ) : !isLive() ? (
-        <p className="rounded-[var(--radius-card)] bg-ng-bg p-3 text-sm text-ng-ink">
+        <p className="rounded-[var(--radius-card)] bg-surface p-3 text-sm text-ink">
           サーバーに接続されていないため、送信できません。
         </p>
       ) : !user ? (
@@ -71,7 +71,7 @@ export default function RequestsPage() {
               className="panel px-3 py-2 text-base"
             />
           </label>
-          {error ? <p role="alert" className="text-sm text-ng-ink">{error}</p> : null}
+          {error ? <p role="alert" className="text-sm text-ink">{error}</p> : null}
           <button
             type="submit"
             disabled={sending}

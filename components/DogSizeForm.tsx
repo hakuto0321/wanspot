@@ -36,7 +36,7 @@ export default function DogSizeForm({
           <label
             key={s}
             className={`flex min-h-14 cursor-pointer items-center gap-3 rounded-[var(--radius-card)] border px-4 ${
-              size === s ? "border-brand bg-ok-bg" : "border-line bg-surface"
+              size === s ? "border-brand bg-surface" : "border-line bg-surface"
             }`}
           >
             <input
@@ -53,7 +53,7 @@ export default function DogSizeForm({
             <span className="text-base">{SIZE_LABEL[s]}</span>
           </label>
         ))}
-        {error ? <p className="text-sm text-ng-ink">{error}</p> : null}
+        {error ? <p className="text-sm text-ink">{error}</p> : null}
       </fieldset>
 
       <label className="flex flex-col gap-1">

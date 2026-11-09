@@ -77,7 +77,7 @@ export default function NewSpotReportPage() {
         </div>
 
         {error ? (
-          <p role="alert" className="border-l-4 border-ng-ink bg-ng-bg px-4 py-3 text-sm text-ng-ink">
+          <p role="alert" className="border-l-4 border-ink bg-surface px-4 py-3 text-sm text-ink">
             {error}
           </p>
         ) : null}

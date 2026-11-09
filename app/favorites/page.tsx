@@ -8,7 +8,7 @@ export default function FavoritesPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-4 py-5">
-      <h1 className="text-2xl font-bold text-brand">お気に入り</h1>
+      <h1 className="text-2xl font-bold text-ink">お気に入り</h1>
 
       {!ready ? (
         <p className="text-ink-sub">読み込み中…</p>

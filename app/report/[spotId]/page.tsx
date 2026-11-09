@@ -106,7 +106,7 @@ function ReportFormView() {
     return (
       <main className="mx-auto w-full max-w-3xl px-4 py-6">
         <p>スポットが見つかりませんでした。</p>
-        <Link href="/report" className="mt-4 inline-block text-brand underline">
+        <Link href="/report" className="mt-4 inline-block text-ink underline">
           報告先を選び直す
         </Link>
       </main>
@@ -131,7 +131,7 @@ function ReportFormView() {
             <label
               key={value}
               className={`flex min-h-14 cursor-pointer items-center gap-3 rounded-[var(--radius-card)] border px-4 ${
-                result === value ? "border-brand bg-ok-bg" : "border-line bg-surface"
+                result === value ? "border-brand bg-surface" : "border-line bg-surface"
               }`}
             >
               <input
@@ -212,7 +212,7 @@ function ReportFormView() {
         ) : null}
 
         {error ? (
-          <p role="alert" className="rounded-[var(--radius-card)] bg-ng-bg p-3 text-sm text-ng-ink">
+          <p role="alert" className="rounded-[var(--radius-card)] bg-surface p-3 text-sm text-ink">
             {error}
           </p>
         ) : null}

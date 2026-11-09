@@ -46,7 +46,7 @@ export default function ReportPickPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-4 py-5">
-      <h1 className="text-2xl font-bold text-brand">報告する</h1>
+      <h1 className="text-2xl font-bold text-ink">報告する</h1>
 
       <label className="flex flex-col gap-1">
         <span className="sr-only">スポット名で探す</span>
@@ -58,7 +58,7 @@ export default function ReportPickPage() {
         />
       </label>
 
-      {error ? <p role="alert" className="text-sm text-ng-ink">{error}</p> : null}
+      {error ? <p role="alert" className="text-sm text-ink">{error}</p> : null}
 
       {filtered === null ? (
         <p className="text-ink-sub">読み込み中…</p>
@@ -86,7 +86,7 @@ export default function ReportPickPage() {
         </ul>
       )}
 
-      <Link href="/report/new" className="flex min-h-11 items-center gap-2 text-base text-brand underline">
+      <Link href="/report/new" className="flex min-h-11 items-center gap-2 text-base text-ink underline">
         <Icon name="plus" className="h-5 w-5" />
         載っていないスポットを追加して報告
       </Link>

@@ -17,7 +17,7 @@ export default function TabBar() {
   return (
     <nav
       aria-label="下部メニュー"
-      className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-10 border-t border-line-soft bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="mx-auto grid max-w-3xl grid-cols-4">
         {TABS.map((tab) => {
@@ -28,7 +28,7 @@ export default function TabBar() {
                 href={tab.href}
                 aria-current={active ? "page" : undefined}
                 className={`flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs ${
-                  active ? "font-bold text-brand" : "text-ink-sub"
+                  active ? "font-bold text-ink" : "text-ink-sub"
                 }`}
               >
                 <Icon name={tab.icon} className="h-6 w-6" />

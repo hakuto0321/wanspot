@@ -34,6 +34,28 @@ export const GENRE_LABEL: Record<Genre, string> = {
   lodging: "宿泊",
 };
 
+// 絞り込みに出す分類（画面用）。中のジャンル（細かい種類）はスポットの詳細に出す。
+export const GENRE_GROUPS = [
+  { key: "eat", label: "食べる・カフェ", genres: ["cafe", "restaurant"] },
+  { key: "park", label: "公園・ドッグラン", genres: ["park", "dog_run"] },
+  { key: "drive", label: "道の駅・SA・PA", genres: ["michi_no_eki", "sa_pa"] },
+  { key: "sightseeing", label: "観光・おでかけ", genres: ["sightseeing"] },
+  { key: "shopping", label: "ショッピング", genres: ["shopping"] },
+  { key: "lodging", label: "宿", genres: ["lodging"] },
+] as const satisfies ReadonlyArray<{ key: string; label: string; genres: readonly Genre[] }>;
+
+export type GenreGroupKey = (typeof GENRE_GROUPS)[number]["key"];
+
+export function groupLabel(key: GenreGroupKey): string {
+  return GENRE_GROUPS.find((g) => g.key === key)?.label ?? key;
+}
+
+/** スポットがその分類に入るか（中のジャンルのどれかが一致すればよい） */
+export function inGroup(genres: readonly Genre[], key: GenreGroupKey): boolean {
+  const group = GENRE_GROUPS.find((g) => g.key === key);
+  return group ? genres.some((g) => (group.genres as readonly Genre[]).includes(g)) : false;
+}
+
 export const STAY_AREAS = ["indoor", "terrace", "outdoor_only", "held_or_cart"] as const;
 export type StayArea = (typeof STAY_AREAS)[number];
 

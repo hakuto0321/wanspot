@@ -5,6 +5,8 @@ import {
   DEFAULT_RADIUS_M,
   allowFor,
   distanceMeters,
+  inGroup,
+  type GenreGroupKey,
   type DogSize,
   type Genre,
   type Policy,
@@ -24,7 +26,8 @@ import { getSupabase } from "./supabase";
 export type SpotQuery = {
   origin: { lat: number; lng: number };
   size?: DogSize;
-  genre?: Genre;
+  /** 絞り込みの分類（画面用の六つ） */
+  group?: GenreGroupKey;
   area?: StayArea;
   radiusM?: number;
 };
@@ -89,7 +92,7 @@ export async function listSpots(query: SpotQuery): Promise<Spot[]> {
 
   if (!sb) {
     return SAMPLE_SPOTS.filter((s) => {
-      if (query.genre && !s.genres.includes(query.genre)) return false;
+      if (query.group && !inGroup(s.genres, query.group)) return false;
       if (query.area && !(s.policy?.areas ?? []).includes(query.area)) return false;
       if (query.size && allowFor(s.policy, query.size) !== "ok") return false;
       return true;
@@ -104,7 +107,7 @@ export async function listSpots(query: SpotQuery): Promise<Spot[]> {
     lng: query.origin.lng,
     radius_m: radius,
     size: query.size ?? null,
-    genre: query.genre ?? null,
+    genre: null,
     lim: 100,
   });
   if (error) throw new Error("スポットの取得に失敗しました");
@@ -136,6 +139,7 @@ export async function listSpots(query: SpotQuery): Promise<Spot[]> {
       distanceM: distances.get(row.id),
     }))
     .filter((s) => !query.area || (s.policy?.areas ?? []).includes(query.area))
+    .filter((s) => !query.group || inGroup(s.genres, query.group))
     .sort((a, b) => (a.distanceM ?? 0) - (b.distanceM ?? 0));
 }
 
@@ -418,6 +422,55 @@ export async function saveDogProfile(profile: { size: DogSize; breed: string } |
       breed: profile.breed || null,
     });
   }
+}
+
+// --- 最近の報告（トップの「最近の報告」に並べる。承認済みだけ） ---
+
+export type RecentReport = SpotReport & { spotId: string; spotName: string };
+
+export async function listRecentReports(limit = 10): Promise<RecentReport[]> {
+  const sb = getSupabase();
+  if (!sb) {
+    return Object.entries(SAMPLE_REPORTS)
+      .flatMap(([spotId, list]) => {
+        const spot = SAMPLE_SPOTS.find((x) => x.id === spotId);
+        return list.map((r) => ({ ...r, spotId, spotName: spot?.name ?? "" }));
+      })
+      .slice(0, limit);
+  }
+  const { data, error } = await sb
+    .from("reports")
+    .select("id, spot_id, result, dog_size, breed, area, comment, photo_path, visited_on, helpful_count, spots(name)")
+    .eq("moderation", "approved")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error("最近の報告を取得できませんでした");
+
+  return ((data ?? []) as unknown as Array<{
+    id: string;
+    spot_id: string;
+    result: ReportResult;
+    dog_size: DogSize | null;
+    breed: string | null;
+    area: StayArea | null;
+    comment: string | null;
+    photo_path: string | null;
+    visited_on: string;
+    helpful_count: number;
+    spots: { name: string } | null;
+  }>).map((r) => ({
+    id: r.id,
+    spotId: r.spot_id,
+    spotName: r.spots?.name ?? "",
+    result: r.result,
+    dogSize: r.dog_size,
+    breed: r.breed,
+    area: r.area,
+    comment: r.comment,
+    photoUrl: r.photo_path ? sb.storage.from(REPORT_BUCKET).getPublicUrl(r.photo_path).data.publicUrl : null,
+    visitedOn: r.visited_on,
+    helpfulCount: r.helpful_count,
+  }));
 }
 
 // --- 報告の中で追加するスポット（承認まで非公開） ---
