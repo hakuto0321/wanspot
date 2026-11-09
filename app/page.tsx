@@ -55,7 +55,7 @@ function HomeView() {
   const [spots, setSpots] = useState<Spot[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // 現在地が許可されていれば近い順の基準に使う（拒否・未対応なら箱根町中心）
+  // 現在地が許可されていれば近い順の基準に使う（拒否・未対応なら東京駅付近）
   useEffect(() => {
     if (!("geolocation" in navigator)) return;
     navigator.geolocation.getCurrentPosition(

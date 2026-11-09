@@ -2,6 +2,7 @@
 // 書き込み（報告・追加リクエスト）は未接続だと必ず失敗させる（サンプルに書いたように見せない）。
 
 import {
+  DEFAULT_RADIUS_M,
   allowFor,
   distanceMeters,
   type DogSize,
@@ -31,7 +32,7 @@ const NOT_CONNECTED = "サーバーに接続されていないため、この操
 /** 近い順にスポットを返す。 */
 export async function listSpots(query: SpotQuery): Promise<Spot[]> {
   const sb = getSupabase();
-  const radius = query.radiusM ?? 30000;
+  const radius = query.radiusM ?? DEFAULT_RADIUS_M;
 
   if (!sb) {
     return SAMPLE_SPOTS.filter((s) => {

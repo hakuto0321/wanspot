@@ -179,8 +179,11 @@ export function formatDate(iso: string | null): string {
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }
 
-/** 箱根町の中心付近。現在地が使えないときの基準点。 */
-export const DEFAULT_ORIGIN = { lat: 35.2326, lng: 139.0228, label: "箱根町中心" };
+/** 関東の基準点（東京駅）。現在地が使えないときの初期位置。 */
+export const DEFAULT_ORIGIN = { lat: 35.6812, lng: 139.7671, label: "東京駅付近" };
+
+/** 近い順の既定検索半径（メートル）。関東の中心から各県の主要部をカバーする。 */
+export const DEFAULT_RADIUS_M = 50000;
 
 export function isDogSize(v: string | null | undefined): v is DogSize {
   return v === "small" || v === "medium" || v === "large";

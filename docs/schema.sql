@@ -144,7 +144,7 @@ create table source_snapshots (
 create or replace function nearby_spots(
   lat double precision,
   lng double precision,
-  radius_m int default 20000,
+  radius_m int default 50000,
   size dog_size default null,
   genre spot_genre default null,
   lim int default 50
