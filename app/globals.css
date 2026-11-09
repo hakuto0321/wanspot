@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/*
+ * デザインルール（CLAUDE.md）のトークン。ダークモードは作らない（ナチュラル×シンプル）。
+ * 色だけで意味を伝えない。OK/NG は必ず文字も出すこと。
+ */
+@theme {
+  --color-canvas: #f5f4ef; /* 背景 */
+  --color-surface: #ffffff; /* 面 */
+  --color-line: #e2e0d8; /* 線 */
+  --color-ink: #1e2a23; /* 文字 */
+  --color-ink-sub: #5b6660; /* 補足文字 */
+  --color-brand: #2e6a4c; /* メイン（森の緑） */
+  --color-ok-bg: #e3eee6;
+  --color-ok-ink: #1f4d36;
+  --color-ng-bg: #f6e4de;
+  --color-ng-ink: #8e2f1c;
+  --color-unverified: #6b5a2e; /* 未確認の文字 */
+
+  --font-sans: var(--font-zen-kaku), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 14px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+}
