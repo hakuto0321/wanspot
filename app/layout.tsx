@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Zen_Kaku_Gothic_New } from "next/font/google";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import TabBar from "@/components/TabBar";
 import "./globals.css";
 
 const zenKakuGothic = Zen_Kaku_Gothic_New({
@@ -28,7 +30,10 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${zenKakuGothic.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        {children}
+        <div className="flex flex-1 flex-col pb-20">{children}</div>
+        <Suspense fallback={null}>
+          <TabBar />
+        </Suspense>
         <ServiceWorkerRegister />
       </body>
     </html>

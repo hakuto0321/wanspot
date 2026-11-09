@@ -198,3 +198,11 @@ create policy "insert spot request" on spot_requests for insert with check (auth
 create policy "insert store request" on store_requests for insert with check (true);
 
 -- review_queue / source_snapshots は service role（pipeline・管理画面）のみ。ポリシーを作らない
+
+-- ========== 公開用ビュー（緯度経度つき） ==========
+-- spots の location は geography のままなので、アプリ用に緯度経度を出す。
+-- security_invoker = true で、呼び出し元の RLS（published のみ読める）をそのまま効かせる。
+create or replace view spots_public with (security_invoker = true) as
+  select s.*, st_y(s.location::geometry) as lat, st_x(s.location::geometry) as lng
+  from spots s;
+grant select on spots_public to anon, authenticated;
